@@ -1,5 +1,11 @@
 # PreservationCheckForResearch
 
+## clone project
+
+```
+git clone --recursive https://github.com/mitubaEX/PreservationCheckForResearch.git
+```
+
 ## Install Dependencies
 
 ```
