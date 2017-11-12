@@ -1,2 +1,3 @@
 target_file/*.jar
 vendor/
+Godeps/
