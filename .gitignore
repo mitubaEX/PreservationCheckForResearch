@@ -1,3 +1,4 @@
 target_file/*.jar
+sandmark/*.jar
 vendor/
 Godeps/
