@@ -4,6 +4,9 @@ vendor/
 Godeps/
 data/
 ToolForResearch
+*.csv
+search_result
+compare_result
 
 # Created by https://www.gitignore.io/api/go,intellij
 
