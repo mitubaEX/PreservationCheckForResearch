@@ -15,12 +15,12 @@ type Argument struct {
 
 func SearchInit() Argument {
 	// オプション取得
-	var f = flag.String("f", "1234", "filename for search")
-	var b = flag.String("b", "1234", "birthmark for search")
-	var r = flag.String("r", "1234", "rows for search")
-	var h = flag.String("h", "1234", "host of search engine")
-	var p = flag.String("p", "1234", "port of search engine")
-	var m = flag.String("m", "1234", "mode of script")
+	var f = flag.String("f", "", "filename for search")
+	var b = flag.String("b", "2gram", "birthmark for search")
+	var r = flag.String("r", "10", "rows for search")
+	var h = flag.String("h", "localhost", "host of search engine")
+	var p = flag.String("p", "8983", "port of search engine")
+	var m = flag.String("m", "search", "mode of script, modes{search, compare}")
 	flag.Parse()
 	return Argument{*f, *b, *r, *h, *p, *m}
 }
