@@ -8,8 +8,10 @@ import (
 
 func main() {
 	var argument settings.Argument = settings.SearchInit()
-	if argument.Mode == "search" {
-		search.Search(argument)
+	for _, v := range argument.Modes{
+		if v == "search" {
+			search.Search(argument)
+		}
 	}
 	fmt.Println(argument.Filename)
 }
