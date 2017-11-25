@@ -19,6 +19,13 @@ Please put sandmark into sandmark directory.
 
 [sandomark](http://sandmark.cs.arizona.edu/)
 
+## Install pochi
+
+```
+cd pochi
+mvn package
+```
+
 ## Install Dependencies
 
 ```

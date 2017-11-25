@@ -1,3 +1,6 @@
 [submodule "donquixote"]
 	path = donquixote
 	url = https://github.com/tamadalab/donquixote.git
+[submodule "pochi"]
+	path = pochi
+	url = https://github.com/tamada/pochi.git
