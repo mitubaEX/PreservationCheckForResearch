@@ -52,7 +52,7 @@ func Search(argument settings.Argument) {
 		// output
 		output.WriteString(strings.Join(row, ",") + "\n")
 		output.WriteString(utility.ScoreNormalization(strings.Replace(
-			strings.Replace(response, "quot;", "", -1), "\"", "", -1)))
+			strings.Replace(response, "quot;", "", -1), "\"", "", -1)) + "\n")
 		output.WriteString(strconv.FormatFloat((time.Now().Sub(start)).Seconds(), 'f', -1, 64) + "sec")
 	}
 	if err := scanner.Err(); err != nil {

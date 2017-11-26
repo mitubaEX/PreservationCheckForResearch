@@ -12,7 +12,7 @@ func Mkdir(directoryName string) error {
 		_, err := os.Stat(filename)
 		return err == nil
 	}
-	if exists(directoryName) {
+	if !exists(directoryName) {
 		if err := os.Mkdir(directoryName, 0777); err != nil {
 			return err
 		}

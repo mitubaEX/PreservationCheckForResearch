@@ -42,7 +42,7 @@ func Compare(argument settings.Argument) {
 				searchBirthmark := scanner.Text()
 				outputFilename = strings.Split(searchBirthmark, ",")[0]
 				utility.WriteFile("a.csv", searchBirthmark)
-			} else if lineCount >= 2 {
+			} else if lineCount >= 1 {
 				searchResult = append(searchResult, scanner.Text())
 			}
 			lineCount += 1
@@ -61,6 +61,6 @@ func Compare(argument settings.Argument) {
 		if err != nil {
 			panic(err)
 		}
-		utility.WriteFile(outputDirectoryName+"/"+outputFilename, string(v))
+		utility.WriteFile(outputDirectoryName+"/"+outputFilename+"-"+argument.Birthmark, string(v))
 	}
 }
