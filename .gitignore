@@ -7,6 +7,8 @@ ToolForResearch
 *.csv
 search_result
 compare_result
+each_compare_result
+false_positive/false_positive
 
 # Created by https://www.gitignore.io/api/go,intellij
 

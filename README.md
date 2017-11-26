@@ -45,6 +45,14 @@ all option setting
 ./ToolForResearch -f <filename> -h <host> -p <port> -r <rows> -b <birthmark>
 ```
 
+### check false positive
+
+```
+cd false_positive
+go build
+./false_positive
+```
+
 ## Option
 
 ```
