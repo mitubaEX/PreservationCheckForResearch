@@ -14,7 +14,7 @@ comparator = bmsys.comparator("SimpsonIndex")
 
 birthmarks = p.merge(q);
 
-comparisons = comparator.compare(birthmarks, pair2);
+comparisons = comparator.compare(p, q, pair2);
 
 fs.print(comparisons);
 //
