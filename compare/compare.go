@@ -4,6 +4,7 @@ import (
 	"../settings"
 	"../utility"
 	"bufio"
+	"fmt"
 	"io/ioutil"
 	"os"
 	"os/exec"
@@ -25,6 +26,9 @@ func Compare(argument settings.Argument) {
 	}
 
 	for _, file := range files {
+		if !strings.Contains(file.Name(), argument.Birthmark) {
+			continue
+		}
 		input, err := os.Open("./search_result/" + file.Name())
 		if err != nil {
 			panic(err)
@@ -52,7 +56,8 @@ func Compare(argument settings.Argument) {
 		if len(searchResult) <= 0 {
 			continue
 		}
-		utility.WriteFile("b.csv", strings.Join(searchResult[:len(searchResult)-1], "\n"))
+		utility.WriteFile("b.csv", strings.Replace(
+			strings.Join(searchResult[:len(searchResult)-1], "\n"), "\\,", ",", -1))
 
 		// compare
 		v, err := exec.Command("java", "-jar",

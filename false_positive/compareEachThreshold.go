@@ -48,7 +48,8 @@ func CompareFromSearchResult(threshold string) {
 		if len(searchResult) <= 0 {
 			continue
 		}
-		utility.WriteFile("b.csv", strings.Join(searchResult[:len(searchResult)-1], "\n"))
+		utility.WriteFile("b.csv", strings.Replace(
+			strings.Join(searchResult[:len(searchResult)-1], "\n"), "\\", "", -1))
 
 		// compare
 		v, err := exec.Command("java", "-jar",
