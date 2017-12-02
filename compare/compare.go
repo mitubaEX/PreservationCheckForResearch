@@ -4,7 +4,6 @@ import (
 	"../settings"
 	"../utility"
 	"bufio"
-	"fmt"
 	"io/ioutil"
 	"os"
 	"os/exec"
