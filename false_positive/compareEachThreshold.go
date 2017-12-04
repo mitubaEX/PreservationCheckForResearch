@@ -52,7 +52,7 @@ func CompareFromSearchResult(threshold string) {
 			strings.Join(searchResult[:len(searchResult)-1], "\n"), "\\", "", -1))
 
 		// compare
-		v, err := exec.Command("java", "-jar",
+		v, err := exec.Command("java", "-Xms20480m", "-Xmx20480m", "-jar",
 			"../pochi/pochi-runner/target/pochi-runner-1.0-SNAPSHOT.jar",
 			"../compare.js", "a.csv", "b.csv").Output()
 		if err != nil {
