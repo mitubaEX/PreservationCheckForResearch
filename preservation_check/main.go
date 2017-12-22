@@ -12,7 +12,7 @@ import (
 func main() {
 	// 検索結果を取ってきて，検索したファイル名が検索結果に含まれているか．
 	// そして含まれていたらその類似度は？
-	searchResultFiles, err := ioutil.ReadDir("../search_result")
+	searchResultFiles, err := ioutil.ReadDir("../search_result_" + os.Args[1])
 	if err != nil {
 		panic(err)
 	}
@@ -22,11 +22,12 @@ func main() {
 	all := 0
 
 	for _, file := range searchResultFiles {
-		input, err := os.Open("../search_result/" + file.Name())
+		input, err := os.Open("../search_result_" + os.Args[1] + "/" + file.Name())
 		if err != nil {
 			panic(err)
 		}
 		defer input.Close()
+
 		scanner := bufio.NewScanner(input)
 
 		scanner.Scan()
@@ -52,6 +53,7 @@ func main() {
 				all++
 			}
 		}
+		input.Close()
 	}
 	fmt.Printf("%d, %d, %d, %d\n", all, count7, count5, count2)
 }
