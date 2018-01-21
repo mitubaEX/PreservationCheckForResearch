@@ -28,32 +28,34 @@ func Search(argument settings.Argument) {
 
 	scanner := bufio.NewScanner(input)
 	for scanner.Scan() {
-		row := splitString(scanner.Text())
-		if len(row) < 4 {
-			continue
-		}
-		// 16進変換
-		encodedString := utility.StringToHexString(row[3])
+		func() {
+			row := splitString(scanner.Text())
+			if len(row) < 4 {
+				return
+			}
+			// 16進変換
+			encodedString := utility.StringToHexString(row[3])
 
-		start := time.Now()
-		// 検索
-		response, err := postJson(argument, encodedString)
-		if err != nil {
-			panic(err)
-		}
+			start := time.Now()
+			// 検索
+			response, err := postJson(argument, encodedString)
+			if err != nil {
+				panic(err)
+			}
 
-		// 検索結果をファイルに書き込む
-		output, err := os.Create(outputDirectoryName + "/" + row[0] + argument.Birthmark)
-		if err != nil {
-			panic(err)
-		}
-		defer output.Close()
+			// 検索結果をファイルに書き込む
+			output, err := os.Create(outputDirectoryName + "/" + row[0] + argument.Birthmark)
+			if err != nil {
+				panic(err)
+			}
+			defer output.Close()
 
-		// output
-		output.WriteString(strings.Join(row, ",") + "\n")
-		output.WriteString(utility.ScoreNormalization(strings.Replace(
-			strings.Replace(response, "quot;", "", -1), "\"", "", -1)) + "\n")
-		output.WriteString(strconv.FormatFloat((time.Now().Sub(start)).Seconds(), 'f', -1, 64) + "sec")
+			// output
+			output.WriteString(strings.Join(row, ",") + "\n")
+			output.WriteString(utility.ScoreNormalization(strings.Replace(
+				strings.Replace(response, "quot;", "", -1), "\"", "", -1)) + "\n")
+			output.WriteString(strconv.FormatFloat((time.Now().Sub(start)).Seconds(), 'f', -1, 64) + "sec")
+		}()
 	}
 	if err := scanner.Err(); err != nil {
 		panic(err)
