@@ -20,6 +20,7 @@ func main() {
 	count5 := 0
 	count2 := 0
 	all := 0
+	other := 0
 
 	for _, file := range searchResultFiles {
 		input, err := os.Open("../search_result_" + os.Args[1] + "/" + file.Name())
@@ -34,9 +35,11 @@ func main() {
 
 		result := strings.Split(scanner.Text(), ",")
 
+		var flag = false
 		for scanner.Scan() {
 			tmp := strings.Split(scanner.Text(), ",")
 			if tmp[0] == result[0] {
+				flag = true
 				flo, err := strconv.ParseFloat(tmp[1], 64)
 				if err != nil {
 					panic(err)
@@ -53,7 +56,10 @@ func main() {
 				all++
 			}
 		}
+		if flag == false {
+			other++
+		}
 		input.Close()
 	}
-	fmt.Printf("%d, %d, %d, %d\n", all, count7, count5, count2)
+	fmt.Printf("%d, %d, %d, %d, %d\n", other, all, count7, count5, count2)
 }
