@@ -8,9 +8,9 @@ q = extractor.extract(source2);
 
 // pair2 = bmsys.pairMaker("RoundRobinWithSamePair")
 pair2 = bmsys.pairMaker("RoundRobin")
-// comparator = bmsys.comparator("JaccardIndex")
+comparator = bmsys.comparator("JaccardIndex")
 // comparator = bmsys.comparator("DiceIndex")
-comparator = bmsys.comparator("SimpsonIndex")
+// comparator = bmsys.comparator("SimpsonIndex")
 
 birthmarks = p.merge(q);
 
