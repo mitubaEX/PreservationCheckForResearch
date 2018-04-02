@@ -3,6 +3,7 @@ package settings
 import (
 	"flag"
 	"fmt"
+	"strconv"
 )
 
 type Argument struct {
@@ -12,6 +13,7 @@ type Argument struct {
 	Host      string
 	Port      string
 	Modes     []string
+	Length    int
 }
 
 type modes []string
@@ -20,7 +22,7 @@ func (s *modes) String() string {
 	return fmt.Sprintf("%v", multipleModes)
 }
 
-func(s *modes) Set(v string) error{
+func (s *modes) Set(v string) error {
 	*s = append(*s, v)
 	return nil
 }
@@ -34,8 +36,13 @@ func SearchInit() Argument {
 	var r = flag.String("r", "10", "rows for search")
 	var h = flag.String("h", "localhost", "host of search engine")
 	var p = flag.String("p", "8983", "port of search engine")
+	var l = flag.String("l", "0", "threshold length of birthmark")
 	//var m = flag.String("m", "search", "mode of script, modes{search, compare}")
 	flag.Var(&multipleModes, "m", "mode of script, modes{search, compare}")
 	flag.Parse()
-	return Argument{*f, *b, *r, *h, *p, multipleModes}
+	length, err := strconv.Atoi(*l)
+	if err != nil {
+		panic(err)
+	}
+	return Argument{*f, *b, *r, *h, *p, multipleModes, length}
 }

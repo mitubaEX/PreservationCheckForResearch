@@ -32,6 +32,8 @@ func Search(argument settings.Argument) {
 			row := splitString(scanner.Text())
 			if len(row) < 4 {
 				return
+			} else if len(strings.Split(row[3], ",")) <= argument.Length {
+				return
 			}
 			// 16進変換
 			encodedString := utility.StringToHexString(row[3])
