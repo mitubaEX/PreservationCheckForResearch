@@ -57,7 +57,7 @@ with open(postFile, 'r') as f:
                     if float(result['score']) / maxScore < 0.25:
                         break
                     write_file.write('{0},{1},{2},{3}\n'.format(
-                        result['filename'], result['score'], result['barthmark'], result['data'].replace('quot;', '')))
+                        result['output'], result['score'], result['barthmark'], result['data'].replace('quot;', '')))
             if float(float(r.json()['response']['docs'][-1]['score']) / maxScore) < 0.25:
                 break
             if birthmark == 'uc':
