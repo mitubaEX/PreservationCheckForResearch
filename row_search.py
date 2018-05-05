@@ -26,7 +26,7 @@ with open(postFile, 'r') as f:
     import csv
     for row in csv.reader(f):
         if len(row[3:]) <= int(length):
-            break
+            continue
         if birthmark == 'uc':
             postData = ','.join(row[3:])
         else:
@@ -51,7 +51,7 @@ with open(postFile, 'r') as f:
         starts = 1000
         while True:
             print(maxScore)
-            with open('search_result/'+row[0]+birthmark, 'w') as write_file:
+            with open('search_result/'+row[0]+birthmark, 'a') as write_file:
                 write_file.write(','.join(row) + '\n')
                 for result in r.json()['response']['docs']:
                     if float(result['score']) / maxScore < 0.25:
