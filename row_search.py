@@ -43,8 +43,10 @@ with open(postFile, 'r') as f:
         start = time.time()
         sumQtime = 0
 
-        r = requests.get(
-            'http://localhost:8983/solr/' + birthmark + '/select', params=payload)
+        r = requests.post(
+                'http://localhost:8983/solr/' + birthmark + '/query?fl=output,score,place,barthmark,data&rows=1000&sort=score%20desc&wt=json',
+                json={'query': 'encode_data: '+ postData})
+        # print(r.json())
         maxScore = float(r.json()['response']['maxScore'])
         # print(maxScore)
         # print(float(r.json()['response']['docs'][-1]['score']))
@@ -66,8 +68,11 @@ with open(postFile, 'r') as f:
             else:
                 payload = {'indent': 'on', 'q': 'encode_data:'+postData,
                            'wt': 'json', 'rows': '1000', 'fl': '*,score', 'start': starts}
-            r = requests.get(
-                'http://localhost:8983/solr/' + birthmark + '/select', params=payload)
+            r = requests.post(
+                    'http://localhost:8983/solr/' + birthmark + '/query?fl=output,score,place,barthmark,data&rows=1000&sort=score%20desc&wt=json&start=' + starts,
+                    json={'query': 'encode_data: '+ postData})
+            # r = requests.get(
+            #     'http://localhost:8983/solr/' + birthmark + '/select', params=payload)
             starts += 1000
             # qtime
             sumQtime += r.json()['responseHeader']['QTime']
