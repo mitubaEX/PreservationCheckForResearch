@@ -69,7 +69,7 @@ with open(postFile, 'r') as f:
                 payload = {'indent': 'on', 'q': 'encode_data:'+postData,
                            'wt': 'json', 'rows': '1000', 'fl': '*,score', 'start': starts}
             r = requests.post(
-                    'http://localhost:8983/solr/' + birthmark + '/query?fl=data,score,place,barthmark,data&rows=1000&sort=score%20desc&wt=json&start=' + starts,
+                    'http://localhost:8983/solr/' + birthmark + '/query?fl=data,score,place,barthmark,data&rows=1000&sort=score%20desc&wt=json&start=' + str(starts),
                     json={'query': 'encode_data: '+ postData})
             # r = requests.get(
             #     'http://localhost:8983/solr/' + birthmark + '/select', params=payload)
