@@ -44,7 +44,7 @@ with open(postFile, 'r') as f:
         sumQtime = 0
 
         r = requests.post(
-                'http://localhost:8983/solr/' + birthmark + '/query?fl=data,score,place,barthmark,data&rows=1000&sort=score%20desc&wt=json',
+                'http://localhost:8983/solr/' + birthmark + '/query?fl=filename,score,place,barthmark,data&rows=1000&sort=score%20desc&wt=json',
                 json={'query': 'encode_data: '+ postData})
         # print(r.json())
         maxScore = float(r.json()['response']['maxScore'])
@@ -59,7 +59,7 @@ with open(postFile, 'r') as f:
                     if float(result['score']) / maxScore < 0.25:
                         break
                     write_file.write('{0},{1},{2},{3}\n'.format(
-                        result['data'], result['score'], result['barthmark'], result['data'].replace('quot;', '')))
+                        result['filename'], result['score'], result['barthmark'], result['data'].replace('quot;', '')))
             if float(float(r.json()['response']['docs'][-1]['score']) / maxScore) < 0.25:
                 break
             if birthmark == 'uc':
@@ -69,7 +69,7 @@ with open(postFile, 'r') as f:
                 payload = {'indent': 'on', 'q': 'encode_data:'+postData,
                            'wt': 'json', 'rows': '1000', 'fl': '*,score', 'start': starts}
             r = requests.post(
-                    'http://localhost:8983/solr/' + birthmark + '/query?fl=data,score,place,barthmark,data&rows=1000&sort=score%20desc&wt=json&start=' + str(starts),
+                    'http://localhost:8983/solr/' + birthmark + '/query?fl=filename,score,place,barthmark,data&rows=1000&sort=score%20desc&wt=json&start=' + str(starts),
                     json={'query': 'encode_data: '+ postData})
             # r = requests.get(
             #     'http://localhost:8983/solr/' + birthmark + '/select', params=payload)
