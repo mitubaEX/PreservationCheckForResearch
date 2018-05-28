@@ -44,22 +44,23 @@ with open(postFile, 'r') as f:
         sumQtime = 0
 
         r = requests.post(
-                'http://localhost:8983/solr/' + birthmark + '/query?fl=output,score,place,barthmark,data&rows=1000&sort=score%20desc&wt=json',
-                json={'query': 'encode_data: '+ postData})
+            'http://localhost:8983/solr/' + birthmark +
+            '/query?fl=output,score,place,barthmark,data&rows=1000&sort=score%20desc&wt=json',
+            json={'query': 'encode_data: ' + postData})
         # print(r.json())
         maxScore = float(r.json()['response']['maxScore'])
         # print(maxScore)
         # print(float(r.json()['response']['docs'][-1]['score']))
         starts = 1000
         while True:
-            print(maxScore)
+            # print(maxScore)
             with open('search_result/'+row[0]+birthmark, 'a') as write_file:
                 write_file.write(','.join(row) + '\n')
                 for result in r.json()['response']['docs']:
                     if float(result['score']) / maxScore < 0.25:
                         break
                     write_file.write('{0},{1},{2},{3}\n'.format(
-                        result['output'], result['score'], result['barthmark'], result['data'].replace('quot;', '')))
+                        result['output'], float(result['score'])/maxScore, result['barthmark'], result['data'].replace('quot;', '')))
             if float(float(r.json()['response']['docs'][-1]['score']) / maxScore) < 0.25:
                 break
             if birthmark == 'uc':
@@ -69,8 +70,10 @@ with open(postFile, 'r') as f:
                 payload = {'indent': 'on', 'q': 'encode_data:'+postData,
                            'wt': 'json', 'rows': '1000', 'fl': '*,score', 'start': starts}
             r = requests.post(
-                    'http://localhost:8983/solr/' + birthmark + '/query?fl=output,score,place,barthmark,data&rows=1000&sort=score%20desc&wt=json&start=' + starts,
-                    json={'query': 'encode_data: '+ postData})
+                'http://localhost:8983/solr/' + birthmark +
+                '/query?fl=output,score,place,barthmark,data&rows=1000&sort=score%20desc&wt=json&start=' +
+                str(starts),
+                json={'query': 'encode_data: ' + postData})
             # r = requests.get(
             #     'http://localhost:8983/solr/' + birthmark + '/select', params=payload)
             starts += 1000
