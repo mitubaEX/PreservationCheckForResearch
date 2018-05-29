@@ -44,7 +44,7 @@ with open(postFile, 'r') as f:
                     postData, algorithm),
                 json={
                     'query': '*:*',
-                    'sort': 'strdist(data, "{0}", {1}) desc'
+                    'sort': 'strdist(data, "{0}", {1}) desc'.format(postData, algorithm)
                 })
         else:
             payload = {'indent': 'on', 'q': 'encode_data:'+postData, 'sort': 'score desc',
@@ -55,7 +55,7 @@ with open(postFile, 'r') as f:
                     postData, algorithm),
                 json={
                     'query': '*:*',
-                    'sort': 'strdist(encode_data, "{0}", {1}) desc'
+                    'sort': 'strdist(encode_data, "{0}", {1}) desc'.format(postData, algorithm)
                 })
 
         # r = requests.post(
@@ -100,7 +100,7 @@ with open(postFile, 'r') as f:
                     str(starts),
                     json={
                         'query': '*:*',
-                        'sort': 'strdist(data, "{0}", {1}) desc'
+                        'sort': 'strdist(data, "{0}", {1}) desc'.format(postData, algorithm)
                     }
                 )
             else:
@@ -112,7 +112,7 @@ with open(postFile, 'r') as f:
                     str(starts),
                     json={
                         'query': '*:*',
-                        'sort': 'strdist(encode_data, "{0}", {1}) desc'
+                        'sort': 'strdist(encode_data, "{0}", {1}) desc'.format(postData, algorithm)
                     }
                 )
             # r = requests.get(
