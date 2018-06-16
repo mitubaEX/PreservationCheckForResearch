@@ -43,7 +43,7 @@ with open(postFile, 'r') as f:
                 '/query?fl=output,lev:strdist(data, "{0}", {1}),place,barthmark,data&rows=1000&sort=score%20desc&wt=json'.format(
                     postData, algorithm),
                 json={
-                    'query': '*:*',
+                    'query': 'data:*',
                     'sort': 'strdist(data, "{0}", {1}) desc'.format(postData, algorithm)
                 })
         else:
@@ -54,7 +54,7 @@ with open(postFile, 'r') as f:
                 '/query?fl=output,lev:strdist(encode_data, "{0}", {1}),place,barthmark,data&rows=1000&sort=score%20desc&wt=json'.format(
                     postData, algorithm),
                 json={
-                    'query': '*:*',
+                    'query': 'encode_data:*',
                     'sort': 'strdist(encode_data, "{0}", {1}) desc'.format(postData, algorithm)
                 })
 
@@ -99,7 +99,7 @@ with open(postFile, 'r') as f:
                     '/query?fl=output,lev:strdist(data, "{0}", {1}),place,barthmark,data&rows=1000&wt=json&start='.format(postData, algorithm) +
                     str(starts),
                     json={
-                        'query': '*:*',
+                        'query': 'data:*',
                         'sort': 'strdist(data, "{0}", {1}) desc'.format(postData, algorithm)
                     }
                 )
@@ -111,7 +111,7 @@ with open(postFile, 'r') as f:
                     '/query?fl=output,lev:strdist(encode_data, "{0}", {1}),place,barthmark,data&rows=1000&wt=json&start='.format(postData, algorithm) +
                     str(starts),
                     json={
-                        'query': '*:*',
+                        'query': 'encode_data:*',
                         'sort': 'strdist(encode_data, "{0}", {1}) desc'.format(postData, algorithm)
                     }
                 )
@@ -127,4 +127,4 @@ with open(postFile, 'r') as f:
             # print("elapsed_time:{0}".format(elapsed_time) + "[sec]")
 
         elapsed_time = time.time() - start
-        # print("elapsed_time:{0}".format(elapsed_time) + "[sec]")
+        print("elapsed_time:{0}".format(elapsed_time) + "[sec]")
