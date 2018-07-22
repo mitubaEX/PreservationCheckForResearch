@@ -14,6 +14,8 @@ type Argument struct {
 	Port      string
 	Modes     []string
 	Length    int
+	InputDir  string
+	OutputDir string
 }
 
 type modes []string
@@ -37,6 +39,8 @@ func SearchInit() Argument {
 	var h = flag.String("h", "localhost", "host of search engine")
 	var p = flag.String("p", "8983", "port of search engine")
 	var l = flag.String("l", "0", "threshold length of birthmark")
+	var i = flag.String("i", "search_result", "seach result dir")
+	var o = flag.String("o", "compare_result", "compare result dir")
 	//var m = flag.String("m", "search", "mode of script, modes{search, compare}")
 	flag.Var(&multipleModes, "m", "mode of script, modes{search, compare}")
 	flag.Parse()
@@ -44,5 +48,5 @@ func SearchInit() Argument {
 	if err != nil {
 		panic(err)
 	}
-	return Argument{*f, *b, *r, *h, *p, multipleModes, length}
+	return Argument{*f, *b, *r, *h, *p, multipleModes, length, *i, *o}
 }

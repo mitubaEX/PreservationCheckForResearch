@@ -14,12 +14,12 @@ import (
 // 一行目と三行目のファイルを作成
 // 比較を実行してファイルとしてcompare_resultに吐き出す
 func Compare(argument settings.Argument) {
-	outputDirectoryName := "./compare_result"
+	// outputDirectoryName := "./compare_result"
 	// ディレクトリ作成
-	utility.Mkdir(outputDirectoryName)
+	utility.Mkdir(argument.OutputDir)
 
 	// search_resultからファイルのリストを取って来る
-	files, err := ioutil.ReadDir("./search_result")
+	files, err := ioutil.ReadDir(argument.InputDir)
 	if err != nil {
 		panic(err)
 	}
@@ -28,7 +28,7 @@ func Compare(argument settings.Argument) {
 		if !strings.Contains(file.Name(), argument.Birthmark) {
 			continue
 		}
-		input, err := os.Open("./search_result/" + file.Name())
+		input, err := os.Open(argument.InputDir + "/" + file.Name())
 		if err != nil {
 			panic(err)
 		}
@@ -65,6 +65,6 @@ func Compare(argument settings.Argument) {
 		if err != nil {
 			panic(err)
 		}
-		utility.WriteFile(outputDirectoryName+"/"+outputFilename+"-"+argument.Birthmark, string(v))
+		utility.WriteFile(argument.OutputDir+"/"+outputFilename+"-"+argument.Birthmark, string(v))
 	}
 }
