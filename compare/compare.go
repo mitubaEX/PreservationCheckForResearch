@@ -1,9 +1,9 @@
 package compare
 
 import (
-	"../settings"
-	"../utility"
 	"bufio"
+	"github.com/mitubaEX/ToolForResearch/settings"
+	"github.com/mitubaEX/ToolForResearch/utility"
 	"io/ioutil"
 	"os"
 	"os/exec"

@@ -1,9 +1,9 @@
 package search
 
 import (
-	"../settings"
-	"../utility"
 	"bufio"
+	"github.com/mitubaEX/ToolForResearch/settings"
+	"github.com/mitubaEX/ToolForResearch/utility"
 	"os"
 	"strconv"
 	"strings"

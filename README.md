@@ -59,17 +59,23 @@ go build
 flag needs an argument: -h
 Usage of ./ToolForResearch:
   -b string
-    	birthmark for search (default "2gram")
+        birthmark for search (default "2gram")
   -f string
-    	filename for search
+        filename for search
   -h string
-    	host of search engine (default "localhost")
-  -m string
-    	mode of script, modes{search, compare} (default "search")
+        host of search engine (default "localhost")
+  -i string
+        seach result dir (default "search_result")
+  -l string
+        threshold length of birthmark
+  -m value
+        mode of script, modes{search, compare}
+  -o string
+        compare result dir (default "compare_result")
   -p string
-    	port of search engine (default "8983")
+        port of search engine (default "8983")
   -r string
-    	rows for search (default "10")
+        rows for search (default "10")
 ```
 
 

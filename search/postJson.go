@@ -1,14 +1,14 @@
 package search
 
 import (
-	"net/http"
 	"bytes"
+	"github.com/mitubaEX/ToolForResearch/settings"
 	"io/ioutil"
-	"../settings"
 	"log"
+	"net/http"
 )
 
-func postJson(argument settings.Argument, encodedString string) (string, error){
+func postJson(argument settings.Argument, encodedString string) (string, error) {
 	jsonStr := `{query:'encode_data:` + encodedString + `'}`
 
 	// log
@@ -19,11 +19,11 @@ func postJson(argument settings.Argument, encodedString string) (string, error){
 	// request設定
 	req, err := http.NewRequest(
 		"POST",
-		"http://" + argument.Host + ":" + argument.Port + "/solr/" + argument.Birthmark + "/query?" +
-			"fl=filename,score,place,birthmark,data&rows=" + argument.Rows + "&sort=score%20desc&wt=csv",
+		"http://"+argument.Host+":"+argument.Port+"/solr/"+argument.Birthmark+"/query?"+
+			"fl=filename,score,place,birthmark,data&rows="+argument.Rows+"&sort=score%20desc&wt=csv",
 		bytes.NewBuffer([]byte(jsonStr)),
 	)
-	if err != nil{
+	if err != nil {
 		return "", err
 	}
 	req.Header.Set("Content-Type", "application/json")

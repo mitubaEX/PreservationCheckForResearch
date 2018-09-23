@@ -1,10 +1,10 @@
 package main
 
 import (
-	"./compare"
-	"./search"
-	"./settings"
 	"fmt"
+	"github.com/mitubaEX/ToolForResearch/compare"
+	"github.com/mitubaEX/ToolForResearch/search"
+	"github.com/mitubaEX/ToolForResearch/settings"
 )
 
 func main() {
