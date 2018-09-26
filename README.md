@@ -3,7 +3,7 @@
 ## clone project
 
 ```
-git clone --recursive https://github.com/mitubaEX/PreservationCheckForResearch.git
+git clone --recursive https://github.com/mitubaEX/ToolForResearch.git
 ```
 
 ## Install donquixote
