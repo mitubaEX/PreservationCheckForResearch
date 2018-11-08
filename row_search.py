@@ -18,10 +18,11 @@ def convertHexData(row_birthmark):
 import os
 os.makedirs('search_result', exist_ok=True)
 
-# python3 <output> postFile length birthmark
+# python3 <output> postFile length birthmark port
 postFile = sys.argv[1]
 length = sys.argv[2]
 birthmark = sys.argv[3]
+port = sys.argv[4]
 with open(postFile, 'r') as f:
     import csv
     for row in csv.reader(f):
@@ -41,7 +42,7 @@ with open(postFile, 'r') as f:
         sumQtime = 0
 
         r = requests.post(
-            'http://localhost:8983/solr/' + birthmark +
+            'http://localhost:'+port+'/solr/' + birthmark +
             '/query?fl=output,score,place,barthmark,data&rows=1000000&sort=score%20desc&wt=json',
             json=payload)
         # print(r.json())
