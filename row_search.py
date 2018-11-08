@@ -63,4 +63,5 @@ with open(postFile, 'r') as f:
         elapsed_time = time.time() - start
 
         elapsed_time = time.time() - start
-        print("elapsed_time:{0}".format(elapsed_time) + "[sec]")
+        with open(birthmark + '-time.csv', 'a') as timef:
+            timef.write("elapsed_time:{0}".format(elapsed_time) + "[sec]\n")
