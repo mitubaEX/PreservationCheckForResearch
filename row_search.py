@@ -46,7 +46,10 @@ with open(postFile, 'r') as f:
             '/query?fl=output,score,place,barthmark,data&rows=1000000&sort=score%20desc&wt=json',
             json=payload)
         # print(r.json())
-        maxScore = float(r.json()['response']['maxScore'])
+        try:
+            maxScore = float(r.json()['response']['maxScore'])
+        except:
+            continue
         starts = 1000
         with open('search_result/'+row[0]+birthmark, 'a') as write_file:
             write_file.write(','.join(row) + '\n')
