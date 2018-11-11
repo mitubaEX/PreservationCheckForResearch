@@ -19,7 +19,7 @@ import os
 os.makedirs('search_result', exist_ok=True)
 os.makedirs('compare_result', exist_ok=True)
 
-# python3 <filename> postFile length birthmark
+# python3 <output> postFile length birthmark
 postFile = sys.argv[1]
 length = sys.argv[2]
 birthmark = sys.argv[3]
@@ -46,10 +46,13 @@ with open(postFile, 'r') as f:
 
         r = requests.post(
             'http://localhost:'+port+'/solr/' + birthmark +
-            '/query?fl=filename,score,place,barthmark,data&rows=1000000&sort=score%20desc&wt=json',
+            '/query?fl=output,score,place,barthmark,data&rows=1000000&sort=score%20desc&wt=json',
             json=payload)
         # print(r.json())
-        maxScore = float(r.json()['response']['maxScore'])
+        try:
+            maxScore = float(r.json()['response']['maxScore'])
+        except:
+            continue
         starts = 1000
         with open('search_result/a.csv', 'w') as write_file:
             write_file.write(','.join(row) + '\n')
@@ -66,7 +69,7 @@ with open(postFile, 'r') as f:
                 if float(result['score'] / maxScore) >= float(threshold):
                     narrow_count += 1
                     write_file.write('{0},{1},{2},{3}\n'.format(
-                        result['filename'], float(result['score'])/maxScore, result['barthmark'], result['data'].replace('quot;', '')))
+                        result['output'], float(result['score'])/maxScore, result['barthmark'], result['data'].replace('quot;', '')))
 
             print('narrow_count: {0}'.format(narrow_count))
 
@@ -100,6 +103,6 @@ with open(postFile, 'r') as f:
         #         sys.exit(1)
         #     for result in r.json()['response']['docs']:
         #         write_file.write('{0},{1},{2},{3}\n'.format(
-        #             result['filename'], float(result['score'])/maxScore, result['barthmark'], result['data'].replace('quot;', '')))
+        #             result['output'], float(result['score'])/maxScore, result['barthmark'], result['data'].replace('quot;', '')))
 
 
