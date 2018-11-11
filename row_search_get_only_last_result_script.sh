@@ -17,7 +17,7 @@ do
   for ethre in 0.0 0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9
   do
     echo "$ethre--------------" && python3 row_search_get_only_last_result.py $i 15 2gram "$ethre" "$1"
-  done > "$birth-$threshold-$1.csv"
+  done > "2gram-$1.csv"
 done
 
 for i in ../birthmark_server/data/search_birthmark/*3gram*.csv
@@ -25,7 +25,7 @@ do
   for ethre in 0.0 0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9
   do
     echo "$ethre--------------" && python3 row_search_get_only_last_result.py $i 24 3gram "$ethre" "$1"
-  done > "$birth-$threshold-$1.csv"
+  done > "3gram-$threshold-$1.csv"
 done
 
 for i in ../birthmark_server/data/search_birthmark/*4gram*.csv
@@ -33,7 +33,7 @@ do
   for ethre in 0.0 0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9
   do
     echo "$ethre--------------" && python3 row_search_get_only_last_result.py $i 31 4gram "$ethre" "$1"
-  done > "$birth-$threshold-$1.csv"
+  done > "4gram-$threshold-$1.csv"
 done
 
 for i in ../birthmark_server/data/search_birthmark/*5gram*.csv
@@ -41,7 +41,7 @@ do
   for ethre in 0.0 0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9
   do
     echo "$ethre--------------" && python3 row_search_get_only_last_result.py $i 37 5gram "$ethre" "$1"
-  done > "$birth-$threshold-$1.csv"
+  done > "5gram-$threshold-$1.csv"
 done
 
 for i in ../birthmark_server/data/search_birthmark/*6gram*.csv
@@ -49,7 +49,7 @@ do
   for ethre in 0.0 0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9
   do
     echo "$ethre--------------" && python3 row_search_get_only_last_result.py $i 41 6gram "$ethre" "$1"
-  done > "$birth-$threshold-$1.csv"
+  done > "6gram-$threshold-$1.csv"
 done
 
 for i in ../birthmark_server/data/search_birthmark/*uc*.csv
@@ -57,5 +57,5 @@ do
   for ethre in 0.0 0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9
   do
     echo "$ethre--------------" && python3 row_search_get_only_last_result.py $i 2 uc "$ethre" "$1"
-  done > "$birth-$threshold-$1.csv"
+  done > "uc-$threshold-$1.csv"
 done
