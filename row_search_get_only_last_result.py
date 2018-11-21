@@ -23,8 +23,9 @@ os.makedirs('compare_result', exist_ok=True)
 postFile = sys.argv[1]
 length = sys.argv[2]
 birthmark = sys.argv[3]
-threshold = sys.argv[4]
-port = sys.argv[5]
+threshold_list = [0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9]
+# threshold = sys.argv[4]
+port = sys.argv[4]
 file_count = 0
 with open(postFile, 'r') as f:
     import csv
@@ -54,46 +55,47 @@ with open(postFile, 'r') as f:
         except:
             continue
         starts = 1000
-        with open('search_result/a.csv', 'w') as write_file:
-            write_file.write(','.join(row) + '\n')
-
-        with open('search_result/b.csv', 'w') as write_file:
-            write_file.write(','.join(row) + '\n')
-            try:
-                if len(list(r.json()['response']['docs'])) == 0:
-                    continue
-            except:
-                continue
-            narrow_count = 0
-            for result in r.json()['response']['docs']:
-                if float(result['score'] / maxScore) >= float(threshold):
-                    narrow_count += 1
-                    write_file.write('{0},{1},{2},{3}\n'.format(
-                        result['output'], float(result['score'])/maxScore, result['barthmark'], result['data'].replace('quot;', '')))
-
-            print('narrow_count: {0}'.format(narrow_count))
-
         # qtime
         sumQtime += r.json()['responseHeader']['QTime']
         elapsed_time = time.time() - start
 
         elapsed_time = time.time() - start
         print("elapsed_time:{0}".format(elapsed_time) + "[sec]")
-
         import subprocess
-        subprocess.run(["sh", "pochicomp.sh"])
+        for threshold in threshold_list:
+            with open('search_result/a.csv', 'w') as write_file:
+                write_file.write(','.join(row) + '\n')
 
-        with open('compare_result/comp_result.csv', 'r') as comp_result:
-            count = 0
-            correct_count = 0
-            for comp in csv.reader(comp_result):
-                if len(comp) == 1:
-                    print(comp[0])
+            with open('search_result/b.csv', 'w') as write_file:
+                write_file.write(','.join(row) + '\n')
+                try:
+                    if len(list(r.json()['response']['docs'])) == 0:
+                        continue
+                except:
                     continue
-                if float(comp[2]) >= 0.75:
-                    correct_count += 1
-                count += 1
-        print('correct_count: {0}, count: {1}'.format(correct_count, count))
+                narrow_count = 0
+                for result in r.json()['response']['docs']:
+                    if float(result['score'] / maxScore) >= float(threshold):
+                        narrow_count += 1
+                        write_file.write('{0},{1},{2},{3}\n'.format(
+                            result['output'], float(result['score'])/maxScore, result['barthmark'], result['data'].replace('quot;', '')))
+
+                print('{0},narrow_count: {1}'.format(threshold, narrow_count))
+
+
+            subprocess.run(["sh", "pochicomp.sh"])
+
+            with open('compare_result/comp_result.csv', 'r') as comp_result:
+                count = 0
+                correct_count = 0
+                for comp in csv.reader(comp_result):
+                    if len(comp) == 1:
+                        print('{0},{1}'.format(threshold, comp[0]))
+                        continue
+                    if float(comp[2]) >= 0.75:
+                        correct_count += 1
+                    count += 1
+            print('{0},correct_count: {1}, count: {2}'.format(threshold, correct_count, count))
         # with open('search_result/'+row[0]+birthmark, 'a') as write_file:
         #     write_file.write(','.join(row) + '\n')
         #     try:
