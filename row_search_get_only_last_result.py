@@ -77,7 +77,7 @@ with open(postFile, 'r') as f:
                 for result in r.json()['response']['docs']:
                     if float(result['score'] / maxScore) >= float(threshold):
                         narrow_count += 1
-                        write_file.write('{1},{2},{3},{4}\n'.format(
+                        write_file.write('{0},{1},{2},{3}\n'.format(
                             result['output'], float(result['score'])/maxScore, result['barthmark'], result['data'].replace('quot;', '')))
 
                 print('{0},narrow_count: {1}'.format(threshold, narrow_count))
@@ -90,7 +90,7 @@ with open(postFile, 'r') as f:
                 correct_count = 0
                 for comp in csv.reader(comp_result):
                     if len(comp) == 1:
-                        print(comp[0])
+                        print('{0},{1}'.format(threshold, comp[0]))
                         continue
                     if float(comp[2]) >= 0.75:
                         correct_count += 1
